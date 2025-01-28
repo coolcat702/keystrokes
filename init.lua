@@ -108,24 +108,13 @@ end
 function M.setup(opts)
 	config = vim.tbl_deep_extend("force", config, opts or {})
 	state.window_options.border = config.style
-	vim.api.nvim_create_user_command("KeystrokesOpen", function()
-		require("keystrokes").open()
-	end, { desc = "Open Keystrokes Window" })
-
-	vim.api.nvim_create_user_command("KeystrokesClose", function()
-		require("keystrokes").close()
-	end, { desc = "Close Keystrokes Window" })
-
-	vim.api.nvim_create_user_command("KeystrokesToggle", function()
-		require("keystrokes").toggle()
-	end, { desc = "Toggle Keystrokes Window" })
 end
 
 function M.open()
 	state.buf = vim.api.nvim_create_buf(false, true)
 	vim.bo[state.buf].ft = "keystrokes"
 
-	state.timer = vim.loop.new_timer()
+	state.timer = vim.uv.new_timer()
 	state.on_key = vim.on_key(function(_, char)
 		if not state.win then
 			state.win = vim.api.nvim_open_win(state.buf, false, state.window_options)
@@ -195,5 +184,17 @@ function M.toggle()
 		M.open()
 	end
 end
+
+vim.api.nvim_create_user_command("KeystrokesOpen", function()
+	require("keystrokes").open()
+end, { desc = "Open Keystrokes Window" })
+
+vim.api.nvim_create_user_command("KeystrokesClose", function()
+	require("keystrokes").close()
+end, { desc = "Close Keystrokes Window" })
+
+vim.api.nvim_create_user_command("KeystrokesToggle", function()
+	require("keystrokes").toggle()
+end, { desc = "Toggle Keystrokes Window" })
 
 return M
