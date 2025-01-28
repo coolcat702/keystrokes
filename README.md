@@ -1,6 +1,6 @@
 # Keystrokes
 
-A plugin to show your keystrokes in a clean way
+A plugin to show your keystrokes in 200 lines of code
 
 ## Installation
 
