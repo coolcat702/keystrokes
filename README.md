@@ -21,7 +21,9 @@ With lazy.nvim:
 ## Usage
 
 `KeystrokesOpen` to open plugin window
+
 `KeystrokesClose` to close plugin window
+
 `KeystrokesToggle` to toggle plugin window
 
 ## Config
