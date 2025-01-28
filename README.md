@@ -10,6 +10,43 @@ With lazy.nvim:
 
 {
     "coolcat702/keystrokes",
-    event = "VimEnter"
+    event = "VimEnter",
+    opts = {}, -- your config here
+    config = function(_, opts)
+        require("keystrokes").setup(opts)
+    end
+}
+```
+
+## Usage
+
+`KeystrokesOpen` to open plugin window
+`KeystrokesClose` to close plugin window
+`KeystrokesToggle` to toggle plugin window
+
+## Config
+
+This is the default config:
+
+```lua
+opts = {
+    timeout = 2000,
+    key_amount = 6,
+    excluded_modes = {},
+    style = "rounded",
+    special_formats = {
+        ["<BS>"] = "󰁮 ",
+        ["<CR>"] = "󰌑 ",
+        ["<Esc>"] = "󰿅 ",
+        ["<Space>"] = "󱁐",
+        ["<Tab>"] = "",
+        ["<Up>"] = "",
+        ["<Down>"] = "",
+        ["<Left>"] = "",
+        ["<Right>"] = "",
+        ["<M>"] = "󰘵 ",
+        ["<C>"] = "",
+        ["<S>"] = "󰘶",
+    }
 }
 ```

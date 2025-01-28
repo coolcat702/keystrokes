@@ -72,6 +72,8 @@ local function process_key(char)
 	local key = vim.fn.keytrans(char)
 	if
 		key:match("Space") and key ~= "<Space>"
+		or (key:match("<Up>") and key ~= "<Up>")
+		or (key:match("<Down>") and key ~= "<Down>")
 		or key:match("Mouse")
 		or key:match("Scroll")
 		or key:match("Drag")
@@ -100,7 +102,6 @@ local function process_key(char)
 		end
 		table.insert(state.keys, { key = key, txt = key })
 	end
-
 	update_display()
 end
 
@@ -118,7 +119,6 @@ function M.setup(opts)
 	vim.api.nvim_create_user_command("KeystrokesToggle", function()
 		require("keystrokes").toggle()
 	end, { desc = "Toggle Keystrokes Window" })
-	M.open()
 end
 
 function M.open()
@@ -139,7 +139,6 @@ function M.open()
 			vim.schedule(M.hide)
 		end)
 	end)
-
 	vim.api.nvim_set_hl(0, "SkInactive", { default = true, link = "Visual" })
 	vim.api.nvim_set_hl(0, "SkActive", { default = true, link = "PmenuSel" })
 
