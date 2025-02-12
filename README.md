@@ -49,6 +49,9 @@ opts = {
         ["<M>"] = "󰘵 ",
         ["<C>"] = "",
         ["<S>"] = "󰘶",
-    }
+    },
+    repeat_show = function(amt, key)
+        return amt .. "(" .. key .. ")"
+    end,
 }
 ```

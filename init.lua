@@ -18,6 +18,9 @@ local config = {
 		["<C>"] = "",
 		["<S>"] = "󰘶",
 	},
+	repeat_show = function(amt, key)
+		return amt .. "(" .. key .. ")"
+	end,
 }
 local state = {
 	keys = {},
@@ -95,7 +98,7 @@ local function process_key(char)
 	local last_key = state.keys[#state.keys]
 	if last_key and key == last_key.key then
 		local count = (last_key.count or 1) + 1
-		state.keys[#state.keys] = { key = key, txt = count .. "(" .. key .. ")", count = count }
+		state.keys[#state.keys] = { key = key, txt = config.repeat_show(count, key), count = count }
 	else
 		if #state.keys == config.key_amount then
 			table.remove(state.keys, 1)
